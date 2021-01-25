@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
-import BookShelf from './BookShelf'
+import { Link } from 'react-router-dom';
+import BookShelf from './BookShelf';
+import PropTypes from 'prop-types'
 
 class BookShelves extends Component {
+    static propTypes = {
+        books: PropTypes.array,
+        updateShelf: PropTypes.func,
+        remove: PropTypes.func
+
+    }
     state = {
         shelves: ['Currently Reading', 'Want To Read', 'Read']
     }
     render() {
         const { shelves } = this.state
-        const { books } = this.props
+        const { books, updateShelf, remove } = this.props
         return(
             <div className="list-books">
             <div className="list-books-title">
@@ -19,14 +27,19 @@ class BookShelves extends Component {
                     <BookShelf
                         key = {index}
                         shelfName = {curShelf}
+                        removeBook={remove}
+                        moveBook={updateShelf}
                         shelfBooks = {books.filter((book) => book.shelf.toLowerCase() === curShelf.replace(/ +/g, "").toLowerCase())}
+                        
                     ></BookShelf>
                 ))}
               </div>
             </div>
-            <div className="open-search">
-              <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
-            </div>
+              <Link
+                className='open-search'
+                to='/search'
+              ><button>Add a book</button></Link>
+
           </div>
         )
     }
