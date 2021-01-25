@@ -1,13 +1,27 @@
 import React, { Component } from 'react'
 import { PropTypes } from 'prop-types'
+
+/*
+* @description - Selection component containing drop-down menu
+* @constructor
+*/
 class Selection extends Component {
     static propTypes = {
         thisShelf: PropTypes.string
     }
-    
+
+    /*
+    * @description - call book update/remove function when selection is changed
+    * @param {event} event - selection/onchange event
+    */
     handleSelect = (event) => {
         this.props.bookUpdate(event.target.value)
     }
+
+    /*
+    * @description - render selection/dropdown element
+    * @returns - html dropdown element
+    */
     render() {
         const {  thisShelf } = this.props
 

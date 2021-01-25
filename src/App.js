@@ -4,23 +4,26 @@ import './App.css'
 import SearchBooks from './SearchBooks'
 import BookShelves from './BookShelves'
 import { Route } from 'react-router-dom'
-//import Book from './Book'
 
+/*
+* @description: represents entire application
+* @constructor
+*/
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    showSearchPage: false,
     books: []
   }
 
+  /*
+  * @description: calls book update function when component loads
+  */
   componentDidMount() {
     this.updateBooks()
   }
+  /*
+  * @description: calls getAll from API
+  * @returns: {array} book objects populated from results of api call
+  */
 
   updateBooks = () => {
     BooksAPI.getAll()
@@ -38,7 +41,12 @@ class BooksApp extends React.Component {
         })
       }))
       ))
-  } 
+  }
+  
+  /*
+  * @description: removes selected book from books array
+  * @param {string} title - title of selected book
+  */
   removeBook = (title) => {// remove book from UI only
     this.setState((curState) =>(
       {
@@ -49,23 +57,23 @@ class BooksApp extends React.Component {
     ))
   }
 
-  getBook = (book) => {
-    BooksAPI.get(book)
-  }
 
+/*
+* @description: update book array
+* @param {object} book - object containing at very minimum the book 'id'
+* @param {shlf} string - new shelf to place book on
+*/
   moveBook = (book, shlf) => {
-    /*
-    this.setState((curState) =>({ //Found method for deep update here : https://stackoverflow.com/a/43639228
-      books: curState.books.map((bk) => bk.id === book.id ? {...bk, shelf: {shlf}} : bk)
-    }))*/
     BooksAPI.update(book, shlf)
       .then(results=>console.log(results))
       .then(() => this.updateBooks())
   }
 
+  /*
+  * @description: render both main app components: shelf page and search page
+  * @returns {component} route components containing app components
+  */
   render() {
-    BooksAPI.search('to')
-      .then((results) => console.log(results  ))
     return (
       <div className="app">
         <Route exact path='/' render={() => (

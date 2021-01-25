@@ -3,6 +3,10 @@ import React, { Component } from 'react'
 import Selection from './Selection'
 import { PropTypes } from 'prop-types'
 
+/*
+* @description - single Book Component containing book information to display
+* @constructor
+*/
 class Book extends Component {
     static propTypes = {
         author: PropTypes.string,
@@ -11,6 +15,10 @@ class Book extends Component {
         curShelf: PropTypes.string
     }
     
+    /*
+    * @description - function to pass into Selection component; calls book update/removal method from main App
+    * @param {string} value - value of option selected
+    */
     handleChange = (value) => {
             if (value!=='none'){
                 this.props.moveBook({id: `${this.props.id}`}, value)
@@ -18,6 +26,10 @@ class Book extends Component {
             else {this.props.removeBook(this.props.title)}
     }
     
+    /*
+    * @description - render this Book element
+    * @returns - html elements plus Selection component
+    */
     render() {
         const { author, title, image, curShelf } = this.props 
         return(

@@ -4,6 +4,10 @@ import Book from './Book'
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types'
 
+/*
+* @description - search page component
+* @constructor
+*/
 class SearchBooks extends Component {
     state = {
         query: '',
@@ -16,7 +20,10 @@ class SearchBooks extends Component {
         remove: PropTypes.func
 
     }
-
+    /*
+    * @description - update query and call searchResults function with timeout
+    * @param {string} query - input from search bar
+    */
     handleChange = (query) => {
         this.setState(() => ({
             query,
@@ -26,6 +33,9 @@ class SearchBooks extends Component {
             this.searchResults()
         }, 500)
     }
+    /*
+    * @description - updates results to pass into Book components
+    */
     //found method for handling input in the accepted answer here: https://knowledge.udacity.com/questions/293047
     searchResults = () => {
         const query = this.state.query
@@ -42,7 +52,12 @@ class SearchBooks extends Component {
             else this.setState(() => ({results: []}))
         }
         )
-            } 
+    }
+    
+    /*
+    * @description - render search page
+    * @returns html elements plus Book components
+    */
     render() {
         const { books, updateShelf, remove } = this.props
         const { query, results } = this.state

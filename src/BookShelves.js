@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import BookShelf from './BookShelf';
 import PropTypes from 'prop-types'
-
+/*
+* @description - bookshelves component representing main page
+* @component
+*/
 class BookShelves extends Component {
     static propTypes = {
         books: PropTypes.array,
@@ -13,6 +16,10 @@ class BookShelves extends Component {
     state = {
         shelves: ['Currently Reading', 'Want To Read', 'Read']
     }
+    /*
+    * @description - render the elements for main bookshelves page
+    * @return html elements
+    */
     render() {
         const { shelves } = this.state
         const { books, updateShelf, remove } = this.props

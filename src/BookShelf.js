@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Book from './Book'
 import { PropTypes } from 'prop-types'
 
+/*
+* @description - single Bookshelf component to show books belonging to this shelf
+* @constructor
+*/
 class BookShelf extends Component {
     static propTypes = {
         shelfBooks: PropTypes.array,
@@ -9,7 +13,11 @@ class BookShelf extends Component {
         removeBook: PropTypes.func,
         moveBook: PropTypes.func
     }
-    
+
+    /*
+    * @description - render shelf component containing Book components
+    * @returns - HTML elements and Book components
+    */
     render(){
         const { shelfBooks, shelfName, removeBook, moveBook } = this.props
         return(
